@@ -1,4 +1,4 @@
-const siteURL = process.env.BASEURL
+const siteURL = process.env.BASE_URL
 
 export const state = () => ({
   posts: [],
