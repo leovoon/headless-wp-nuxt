@@ -1,10 +1,10 @@
 import axios from "axios"
 
+const baseUrl = process.env.baseUrl
 
-
-let dynamicRoutes = ({$config: {baseURL}}) => {
+let dynamicRoutes = () => {
   const routes = axios
-  .get(`${baseURL}/wp-json/wp/v2/posts?page=1&per_page=20`)
+  .get(` ${baseURL}/wp-json/wp/v2/posts?page=1&per_page=20`)
     .then(res => {
       return res.data.map(post => `/blog/${post.slug}`)
     })
@@ -14,12 +14,13 @@ let dynamicRoutes = ({$config: {baseURL}}) => {
 
 export default {
   mode: "universal",
+  env: { 
+    baseURL: 'https://suburtiasa.com'
+  },
   /*
    ** Headers of the page
    */
-  publicRuntimeConfig: {
-    baseURL: 'https://www.suburtiasa.com'
-  },
+  
   head: {
     title: process.env.npm_package_name || "",
     meta: [
@@ -62,9 +63,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    '@nuxtjs/dotenv'
-  ],
+  buildModules: [],
   /*
    ** Build configuration
    */
