@@ -2,15 +2,15 @@ const siteUrl = 'https://suburtiasa.com'
 
 export const state = () => ({
   posts: [],
-  tags: []
+  categories: []
 })
 
 export const mutations = {
   updatePosts: (state, posts) => {
     state.posts = posts
   },
-  updateTags: (state, tags) => {
-    state.tags = tags
+  updateCategories: (state, categories) => {
+    state.categories = categories
   }
 }
 
@@ -25,13 +25,13 @@ export const actions = {
 
       posts = posts
         .filter(el => el.status === "publish")
-        .map(({ id, slug, title, excerpt, date, tags, content }) => ({
+        .map(({ id, slug, title, excerpt, date, category, content }) => ({
           id,
           slug,
           title,
           excerpt,
           date,
-          tags,
+          category,
           content
         }))
 
@@ -40,25 +40,25 @@ export const actions = {
       console.log(err)
     }
   },
-  async getTags({ state, commit }) {
-    if (state.tags.length) return
+  async getCategory({ state, commit }) {
+    if (state.categories.length) return
 
-    let allTags = state.posts.reduce((acc, item) => {
-      return acc.concat(item.tags)
+    let allCategories = state.posts.reduce((acc, item) => {
+      return acc.concat(item.categories)
     }, [])
-    allTags = allTags.join()
+    allCategories = allCategories.join()
 
     try {
-      let tags = await fetch(
-        ` ${siteUrl}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
+      let categories = await fetch(
+        ` ${siteUrl}/wp-json/wp/v2/categories?page=1&per_page=40&include=${allCategories}`
       ).then(res => res.json())
 
-      tags = tags.map(({ id, name }) => ({
+      categories = categories.map(({ id, name }) => ({
         id,
         name
       }))
 
-      commit("updateTags", tags)
+      commit("updateCategories", categories)
     } catch (err) {
       console.log(err)
     }

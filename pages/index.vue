@@ -8,22 +8,23 @@
             <a :href="`blog/${post.slug}`">{{ post.title.rendered }}</a>
           </h3>
           <small>{{ post.date | dateformat }}</small>
+          <small style="font-weight: bold">{{ post.category.title  }}</small>
           <div v-html="post.excerpt.rendered"></div>
           <a :href="`blog/${post.slug}`" class="readmore slide">Read more ⟶</a>
         </div>
       </main>
       <aside>
-        <h2 class="tags-title">Tags</h2>
+        <h2 class="tags-title">Categories</h2>
         <div class="tags-list">
           <ul>
             <li
-              @click="updateTag(tag)"
-              v-for="tag in tags"
-              :key="tag.id"
-              :class="[tag.id === selectedTag ? activeClass : '']"
+              @click="updateCategories(category)"
+              v-for="category in categories"
+              :key="category.id"
+              :class="[category.id === selectedCategory ? activeClass : '']"
             >
-              <a>{{ tag.name }}</a>
-              <span v-if="tag.id === selectedTag">✕</span>
+              <a>{{ category.name }}</a>
+              <span v-if="tag.id === selectedCategory">✕</span>
             </li>
           </ul>
         </div>
@@ -41,7 +42,7 @@ export default {
   },
   data() {
     return {
-      selectedTag: null,
+      selectedCategory: null,
       activeClass: "active"
     };
   },
@@ -49,23 +50,23 @@ export default {
     posts() {
       return this.$store.state.posts;
     },
-    tags() {
-      return this.$store.state.tags;
+    categories() {
+      return this.$store.state.categories;
     },
     sortedPosts() {
-      if (!this.selectedTag) return this.posts;
-      return this.posts.filter(el => el.tags.includes(this.selectedTag));
+      if (!this.selectedCategory) return this.posts;
+      return this.posts.filter(el => el.categories.includes(this.selectedCategory));
     }
   },
   created() {
     this.$store.dispatch("getPosts");
   },
   methods: {
-    updateTag(tag) {
-      if (!this.selectedTag) {
-        this.selectedTag = tag.id;
+    updateTag(category) {
+      if (!this.selectedCategory) {
+        this.selectedCategory = category.id;
       } else {
-        this.selectedTag = null;
+        this.selectedCategory = null;
       }
     }
   }
