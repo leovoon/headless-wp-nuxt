@@ -12,9 +12,7 @@ let dynamicRoutes = () => {
 
 export default {
   mode: "universal",
-  env: { 
-    baseURL: 'https://suburtiasa.com'
-  },
+  
   /*
    ** Headers of the page
    */
