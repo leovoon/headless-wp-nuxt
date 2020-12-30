@@ -1,4 +1,4 @@
-const siteURL = "https://www.suburtiasa.com/"
+const siteURL = process.env.BASEURL
 
 export const state = () => ({
   posts: [],

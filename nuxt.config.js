@@ -1,7 +1,10 @@
 import axios from "axios"
+
+
+
 let dynamicRoutes = () => {
   const routes = axios
-    .get(`https://${siteURL}wp-json/wp/v2/posts?page=1&per_page=20`)
+    .get(`https://${baseUrl}wp-json/wp/v2/posts?page=1&per_page=20`)
     .then(res => {
       return res.data.map(post => `/blog/${post.slug}`)
     })
@@ -14,6 +17,9 @@ export default {
   /*
    ** Headers of the page
    */
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
   head: {
     title: process.env.npm_package_name || "",
     meta: [
