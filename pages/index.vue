@@ -62,7 +62,7 @@ export default {
     this.$store.dispatch("getPosts");
   },
   methods: {
-    updateTag(category) {
+    updateCategories(category) {
       if (!this.selectedCategory) {
         this.selectedCategory = category.id;
       } else {
