@@ -1,4 +1,3 @@
-const siteURL = process.env.BASE_URL
 
 export const state = () => ({
   posts: [],
@@ -15,12 +14,12 @@ export const mutations = {
 }
 
 export const actions = {
-  async getPosts({ state, commit, dispatch }) {
+  async getPosts({ state, commit, dispatch,  $config: { baseURL }  }) {
     if (state.posts.length) return
 
     try {
       let posts = await fetch(
-        `https://${siteURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
+        `https://${baseURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
       ).then(res => res.json())
 
       posts = posts
@@ -40,7 +39,7 @@ export const actions = {
       console.log(err)
     }
   },
-  async getTags({ state, commit }) {
+  async getTags({ state, commit,  $config: { baseURL }  }) {
     if (state.tags.length) return
 
     let allTags = state.posts.reduce((acc, item) => {
@@ -50,7 +49,7 @@ export const actions = {
 
     try {
       let tags = await fetch(
-        `https://${siteURL}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
+        `${baseURL}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
       ).then(res => res.json())
 
       tags = tags.map(({ id, name }) => ({
