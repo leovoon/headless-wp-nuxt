@@ -24,7 +24,7 @@
               :class="[category.id === selectedCategory ? activeClass : '']"
             >
               <a>{{ category.name }}</a>
-              <span v-if="tag.id === selectedCategory">✕</span>
+              <span v-if="category.id === selectedCategory">✕</span>
             </li>
           </ul>
         </div>
