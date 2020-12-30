@@ -1,4 +1,3 @@
-const baseURL = process.env.baseURL
 
 export const state = () => ({
   posts: [],
@@ -20,7 +19,7 @@ export const actions = {
 
     try {
       let posts = await fetch(
-        ` ${baseURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
+        ` ${process.env.baseURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
       ).then(res => res.json())
 
       posts = posts
@@ -50,7 +49,7 @@ export const actions = {
 
     try {
       let tags = await fetch(
-        ` ${baseURL}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
+        ` ${process.env.baseURL}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
       ).then(res => res.json())
 
       tags = tags.map(({ id, name }) => ({
