@@ -40,7 +40,7 @@ export const actions = {
       console.log(err)
     }
   },
-  async getTags({ state, commit,  $config: { baseURL }  }) {
+  async getTags({ state, commit }) {
     if (state.tags.length) return
 
     let allTags = state.posts.reduce((acc, item) => {
