@@ -20,7 +20,7 @@ export const actions = {
 
     try {
       let posts = await fetch(
-        `${siteURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
+        `https://${siteURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
       ).then(res => res.json())
 
       posts = posts
@@ -50,7 +50,7 @@ export const actions = {
 
     try {
       let tags = await fetch(
-        `${siteURL}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
+        `https://${siteURL}/wp-json/wp/v2/tags?page=1&per_page=40&include=${allTags}`
       ).then(res => res.json())
 
       tags = tags.map(({ id, name }) => ({
