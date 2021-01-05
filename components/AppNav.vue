@@ -3,7 +3,7 @@
     <ul>
       <li>
         <nuxt-link exact to="/">
-          <app-icon></app-icon>Website Name
+          <app-icon></app-icon>readST
         </nuxt-link>
       </li>
       <li>

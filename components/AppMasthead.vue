@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      tagline: "Headless WordPress on the JAMstack"
+      tagline: "Read Subur Tiasa Annoucement"
     };
   }
 };
@@ -18,7 +18,7 @@ export default {
 @import "@/assets/mixins.scss";
 section.masthead {
   width: 100%;
-  height: 90vh;
+  height: 40vh;
   overflow: hidden;
   text-align: center;
   display: flex;
@@ -29,8 +29,8 @@ section.masthead {
       center,
       ellipse cover,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0) 37%,
-      rgba(0, 0, 0, 0.65) 100%
+      rgba(0, 0, 0, 0) 49%,
+      rgba(0, 0, 0, 0.8) 100%
     ),
     url("/mountains-masthead.jpg") no-repeat center center scroll; /* FF3.6-15 */
   background: -webkit-radial-gradient(

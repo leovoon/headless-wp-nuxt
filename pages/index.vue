@@ -2,20 +2,27 @@
   <div>
     <app-masthead></app-masthead>
     <div class="posts">
+      
       <main>
+        <p  v-if="!selectedCategory">Showing all posts</p>
         <div class="post" v-for="post in sortedPosts" :key="post.id">
           <h3>
-            <a :href="`blog/${post.slug}`">{{ post.title.rendered }}</a>
+            <a :href="`blog/${post.slug}`">
+              <span v-html="post.title.rendered"></span>
+            </a>
           </h3>
           <small>{{ post.date | dateformat }}</small>
-          <span> | </span>
-          <small style="font-weight: bold">{{ post.categories  }}</small>
+
+         
+         
           <div v-html="post.excerpt.rendered"></div>
           <a :href="`blog/${post.slug}`" class="readmore slide">Read more ⟶</a>
         </div>
+    <a href="https://suburtiasa.com/">Read more from Subur Tiasa</a>
+
       </main>
-      <aside>
-        <h2 class="tags-title">Categories</h2>
+      <aside id="navbar">
+        <h2 class="tags-title">Filter by Categories</h2>
         <div class="tags-list">
           <ul>
             <li
@@ -37,14 +44,17 @@
 <script>
 import AppMasthead from "@/components/AppMasthead.vue";
 
+
+
 export default {
   components: {
-    AppMasthead
+    AppMasthead,
   },
   data() {
     return {
       selectedCategory: null,
-      activeClass: "active"
+      activeClass: "active",
+      routeName: { type: String, default: "" },
     };
   },
   computed: {
@@ -56,8 +66,28 @@ export default {
     },
     sortedPosts() {
       if (!this.selectedCategory) return this.posts;
-      return this.posts.filter(el => el.categories.includes(this.selectedCategory));
-    }
+      return this.posts.filter((el) =>
+        el.categories.includes(this.selectedCategory)
+      );
+    },
+  
+
+    getRouteName() {
+      return this.$route.name;
+    },
+  },
+  beforeMount() {
+    
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos > currentScrollPos) {
+    document.getElementById("navbar").style.bottom = "0";
+  } else {
+    document.getElementById("navbar").style.bottom = "-800px";
+  }
+  prevScrollpos = currentScrollPos;
+}
   },
   created() {
     this.$store.dispatch("getPosts");
@@ -69,8 +99,8 @@ export default {
       } else {
         this.selectedCategory = null;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -208,5 +238,20 @@ a.readmore {
   left: -2px;
   right: 108%;
   backface-visibility: hidden;
+}
+
+@media (max-width: 640px)  { 
+  .posts {
+    grid-template-columns: 1fr;
+    }
+
+
+  aside {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    transition: all 0.5s ease-in-out;
+  }
 }
 </style>
