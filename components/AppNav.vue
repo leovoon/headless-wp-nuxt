@@ -3,7 +3,14 @@
     <ul>
       <li>
         <nuxt-link exact to="/">
-          <app-icon></app-icon>readST
+        <div class="logo">
+
+          <app-icon></app-icon>
+         <span>
+           
+           readST
+           </span> 
+        </div>
         </nuxt-link>
       </li>
       <li>
@@ -61,6 +68,14 @@ ul {
     align-items: center;
     justify-content: space-between;
     
+  }
+  
+  .logo {
+    display: inline-flex;
+    
+    span {
+      padding-left: 10px;
+    }
   }
 }
 </style>
