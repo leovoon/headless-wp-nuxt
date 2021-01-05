@@ -1,7 +1,7 @@
 {
-  "name": "wp-nuxt",
+  "name": "readST",
   "version": "1.0.0",
-  "description": "Headless WordPress with Nuxt",
+  "description": "Read suburtiasa annoucemnet. Headless WordPress with Nuxt",
   "author": "leovoon",
   "private": true,
   "scripts": {
