@@ -53,4 +53,14 @@ ul {
     margin-right: 30px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  ul {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+  }
+}
 </style>
